@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-using UnityEngine.SceneManagement;
 
 public class GridEnvironment : Environment
 {
@@ -24,6 +22,9 @@ public class GridEnvironment : Environment
         BeginNewGame();
     }
 
+    /// <summary>
+    /// Restarts the learning process with a new Grid.
+    /// </summary>
     public void BeginNewGame()
     {
         int gridSizeSet = (GameObject.Find("Dropdown").GetComponent<Dropdown>().value + 1) * 5;
@@ -43,6 +44,9 @@ public class GridEnvironment : Environment
 
     }
 
+    /// <summary>
+    /// Established the Grid.
+    /// </summary>
     public override void SetUp()
     {
         envParameters = new EnvironmentParameters()
@@ -83,6 +87,10 @@ public class GridEnvironment : Environment
         RunMdp();
     }
 
+    /// <summary>
+    /// Gets the agent's current position and transforms it into a discrete integer state.
+    /// </summary>
+    /// <returns>The state.</returns>
     public override List<float> collectState()
     {
         List<float> state = new List<float>();
@@ -97,6 +105,9 @@ public class GridEnvironment : Environment
         return state;
     }
 
+    /// <summary>
+    /// Resizes the grid to the specified size.
+    /// </summary>
     public void SetEnvironment()
     {
         GameObject.Find("Plane").transform.localScale = new Vector3(gridSize / 10.0f, 1f, gridSize / 10.0f);
@@ -118,6 +129,9 @@ public class GridEnvironment : Environment
         objectPositions = numbers.ToArray();
     }
 
+    /// <summary>
+    /// Draws the value estimation spheres on the grid.
+    /// </summary>
     public void LoadSpheres()
     {
         GameObject[] values = GameObject.FindGameObjectsWithTag("value");
@@ -142,7 +156,9 @@ public class GridEnvironment : Environment
         }
     }
 
-
+    /// <summary>
+    /// Resets the episode by placing the objects in their original positions.
+    /// </summary>
     public override void Reset()
     {
         base.Reset();
@@ -170,7 +186,10 @@ public class GridEnvironment : Environment
         EndReset();
     }
 
-
+    /// <summary>
+    /// Allows the agent to take actions, and set rewards accordingly.
+    /// </summary>
+    /// <param name="action">Action.</param>
     public override void MiddleStep(int action)
     {
         reward = -0.05f;

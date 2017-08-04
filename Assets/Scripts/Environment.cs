@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class EnvironmentParameters {
 	public int state_size { get; set; }
@@ -36,18 +35,6 @@ public abstract class Environment : MonoBehaviour {
 	public int bumper;
 
 	public EnvironmentParameters envParameters;
-
-	// Use this for initialization
-	void Start () {
-		maxSteps = 500;
-		waitTime = 0.001f;
-		frameToSkip = 0;
-
-        agent = new InternalAgent();
-		SetUp ();
-		agent.SendParameters (envParameters);
-		acceptingSteps = true;
-	}
 
 	public virtual void SetUp () {
 		envParameters = new EnvironmentParameters()
