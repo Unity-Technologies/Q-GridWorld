@@ -26,7 +26,7 @@ public class InternalAgent : Agent {
 	}
 
 	/// <summary>
-	/// Picks an action to taken given a state.
+    /// Picks an action to take from its current state.
 	/// </summary>
 	/// <returns>The action choosen by the agent's policy</returns>
 	public override float[] GetAction() {
